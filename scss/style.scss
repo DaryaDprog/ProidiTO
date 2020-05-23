@@ -3,24 +3,87 @@
 /* Navigation */
 nav {
     background: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 .nav {
     text-align: center;
     margin: 0;
     padding: 25px 0;
-
-& li{
+    transition: all .2s ease-in-out;
+    &.active {
+        display: block;
+    }
+& li {
     display: inline;
     padding: 0 12px;
     font-size: 14px;
     border-right: 1px solid black;
+    cursor: pointer;
+    color: #445566;
+    &.active {
+        color: rgb(52, 56, 61);
+        font-weight: bold;
+    }
+   
     &:last-child {
         border-right: none;
     }
-    & a {
-    text-decoration: none;
-    color: #445566;
-    }
 }
+}
+.navToggle {
+  display: none;
+  width: 30px;
+  padding: 10px 0;
+  font-size: 0;
+  color: transparent;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  right: 5%;
+  outline: unset;
+  z-index: 1;
+    .navToggleItem {
+        width: 100%;
+        height: 3px;
+        background-color: #445566;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        transition: all 0.2s ease-in-out;
+        &::before, &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 3px;
+        background-color: #445566; 
+        transition: transform 0.5s ease-in-out;  
+        }
+        &::before {
+            top: -10px;
+        } 
+        &::after {
+            top: 10px;
+        }
+    }
+    .active {
+       background-color: unset;
+       &::before {
+           transform: rotate(40deg);
+       }
+       &::after {
+        transform: rotate(-40deg) translate(13px,-15px);
+    }
+    }
 }
 }
 
@@ -32,35 +95,41 @@ header {
     color: #bcbcbc;
     font-size: 14px;
     line-height: 130%;
-
+    margin-top: 71px;
 .inner {
     display: flex;
    .logo {
     display: flex;
     align-items: center;
     & img {
-        width: 30%;
+        width: 25%;
         margin-top: 5px;  
         margin-right: 20px; 
     }
     .title {
-        font-size: 58px;
-        padding-bottom: 10px;
+        font-size: 55px;
+        padding-bottom: 30px;
     }
     .subtitle {
         text-transform: uppercase;
-        font-size: 20px;
+        font-size: 27px;
     }
    }
    .contacts {
     color: #bcbcbc;
     font-size: 14px;
     line-height: 130%;
+    padding: 5px;
     & ul {
         list-style: none;
         display: inline;
+        padding: 0;
         & li {
             padding: 5px 0;
+            & a {
+                vertical-align: middle;
+                padding-right: 5px;
+            }
         }
     }
    }
@@ -70,14 +139,17 @@ header {
        font-size: 14px;
        & ul {
            list-style: none;
-           padding-left: 0;
-           margin-bottom: 0;
+           padding: 5px;
+           margin: 0;
+           color: #bcbcbc;
            & li {
                padding: 5px 0;
+               color: #bcbcbc !important;
+               text-decoration: none !important;
            }
        }
        .socials {
-           
+           padding: 0 0 5px 5px;
        }
    }
 }
@@ -121,11 +193,16 @@ header {
     margin-top: 20px;
     flex-wrap: wrap;
     .formInner {
-        width: 48%;
+        width: 45%;
         padding-left: 10px;
         .request {
             font-size: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+        #errorMess {
+            padding: 5px;
+            color: red;
+            font-size: 16px;
         }
         & form {
             height: 90px;
@@ -173,7 +250,6 @@ header {
                 right: -32px;
                 border: 6px solid rgb(72, 73, 75);
                 font-size: 25px;
-               // text-indent: 0px;
                 padding-left: 7px;
                 text-align: center;
 
@@ -192,7 +268,7 @@ header {
 
     .formItem {
         position: relative;
-        width: 50%;
+        width: 45%;
         padding-right: 10px;
     & img {
         opacity: .5;
@@ -203,9 +279,10 @@ header {
         font-size: 22px;
         font-weight: 700;
         text-transform: uppercase;
-        top: 35px;
+        top: 40px;
         left: 25%;
         z-index: 10;
+        font-family: 'Oswald', sans-serif;
     }
 }
 }
@@ -215,14 +292,23 @@ header {
 .about {
     margin: 20px 20px 40px 20px;
     padding-bottom: 40px;
-    & h2 {
-        text-align: center;
-        font-size: 26px;
-        color: #445566;
-    }
     & p {
         padding: 20px 100px;
         line-height: 1.5;
+        & span {
+            color: #445566;
+        }
+    }
+    .note {
+        border: 1px solid #445566;
+        padding: 20px;
+        border-radius: 5px;
+        margin-right: 22%;
+        margin-left: 100px;
+        color: #445566;
+        & svg {
+            vertical-align: middle;
+        }
     }
     & h3 {
         padding: 0 100px;
@@ -248,15 +334,14 @@ header {
 
 /* Header */
 header {
+    height: auto;
    .inner {
    .logo { 
-       & img {
-        margin-top: 15px;   
-        }
         .name {
+            margin-top: 10px;
         .title {
-            font-size: 35px;
-            padding-bottom: 0px;
+            font-size: 30px;
+            padding-bottom: 10px;
         }
         .subtitle {
             font-size: 15px;
@@ -305,12 +390,9 @@ header {
 header {
     .inner {
     .logo { 
-        & img {
-        margin-top: 25px;   
-    }
         .name {
         .title {
-            font-size: 30px;
+            font-size: 25px;
         }
         .subtitle {
             font-size: 12px;
@@ -350,11 +432,29 @@ header {
     }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 580px) {
+/* Navigation */
+nav {
+.nav {
+    display: none;
+    padding: 15px 0;
+    & li {
+        display: block;
+        text-align: left;
+    }
+}
+.navToggle {
+    display: block;
+}
+}
 /* Header */
 header {
+    margin-top: 125px;
     .inner {
     .logo {
+        & img {
+            margin-right: 10px;
+        }
         .name {
         .title {
             font-size: 25px;
@@ -410,6 +510,9 @@ header {
     & p {
         padding: 5px 20px;
 }
+.note {
+    margin-left: 20px;
+}
     & ul {
         padding: 0 20px;
         }
@@ -420,16 +523,16 @@ header {
 /* Header */
 header {
     line-height: unset;
-    height: auto;
     padding-bottom: 10px;
     .inner {
     .logo {
         & img {
-            margin-right: 10px;
+            margin-right: 5px;
         }
         .name {
         .title {
             font-size: 20px;
+            padding: 0;
         }
         .subtitle {
             font-size: 10px;
@@ -444,12 +547,17 @@ header {
 
 .about {
     margin-top: 0;
-    & h2,h3 {
+    & h3 {
         font-size: 18px;
+        padding: 0;
     }
     & p {
         text-align: center;
         font-size: 14px;
+    }
+    .note {
+        font-size: 14px;
+        margin-right: 0;
     }
     & ul {
         padding: 0 25px; 
