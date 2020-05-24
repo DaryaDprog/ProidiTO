@@ -34,17 +34,17 @@ $("#sendMail").on("click", function() {
     $("#errorMess").text("");
 
     $.ajax({
-        url: 'mail.php',
+        url: 'Index.java',
         type: 'POST',
         cache: false,
         data: { 'message': message },
         dataType: 'html',
         beforeSend: function() {
-            $("#sendMail").prop("disabled", true);    
+            $("#sendMail").prop('disabled', true);    
         },
         success: function(data) {
             alert(data);
-            $("#sendMail").prop("disabled", false);
+            $("#sendMail").prop('disabled', false);
         }
     });
 });
