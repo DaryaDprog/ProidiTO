@@ -34,7 +34,7 @@ $("#sendMail").on("click", function() {
     $("#errorMess").text("");
 
     $.ajax({
-        url: 'Index.java',
+        url: 'mail.php',
         type: 'POST',
         cache: false,
         data: { 'message': message },
