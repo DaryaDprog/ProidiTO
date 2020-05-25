@@ -23,27 +23,35 @@ $('.nav').toggleClass('active');
 
 /* Mail */
     
-$("#sendMail").on("click", function() {
+$('#sendMail').on('click', function() {
 
     var message = $("#text").val().trim();
+    var email = $("#email").val().trim();
 
     if(message == "") {
         $("#errorMess").text("Введите вопрос");
         return false;
-    } 
+    } else if(email == "") {
+        $("#errorMess").text("Введите email");
+        return false;
+    }
     $("#errorMess").text("");
 
     $.ajax({
         url: 'mail.php',
         type: 'POST',
         cache: false,
-        data: { 'message': message },
+        data: { 'message': message, 'email': email },
         dataType: 'html',
         beforeSend: function() {
-            $("#sendMail").prop('disabled', true);    
+            $("#sendMail").prop('disabled', true);
         },
         success: function(data) {
-            alert(data);
+            if(!data)
+                alert("Ошибка отправки сообщения.");
+            else
+                $("#mailForm").trigger("reset");
+
             $("#sendMail").prop('disabled', false);
         }
     });
